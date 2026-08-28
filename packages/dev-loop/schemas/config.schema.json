@@ -1,0 +1,38 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://raw.githubusercontent.com/what3verCODE/pi-setup/main/packages/dev-loop/schemas/config.schema.json",
+	"title": "@what3vercode/dev-loop config",
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"$schema": {
+			"type": "string"
+		},
+		"maxCycles": {
+			"type": "integer",
+			"minimum": 1,
+			"maximum": 10,
+			"default": 3
+		},
+		"agents": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"briefer": { "type": "string", "minLength": 1, "default": "oracle" },
+				"worker": { "type": "string", "minLength": 1, "default": "worker" },
+				"tester": { "type": "string", "minLength": 1, "default": "tester" },
+				"reviewer": { "type": "string", "minLength": 1, "default": "reviewer" },
+				"sanity": { "type": "string", "minLength": 1, "default": "reviewer" }
+			}
+		},
+		"rolePrompts": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"worker": { "type": "string", "minLength": 1 },
+				"tester": { "type": "string", "minLength": 1 },
+				"reviewer": { "type": "string", "minLength": 1 }
+			}
+		}
+	}
+}

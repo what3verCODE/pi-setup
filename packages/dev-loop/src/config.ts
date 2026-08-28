@@ -15,8 +15,19 @@ function isRecord(value: unknown): value is Record<string, unknown> {
 	return typeof value === "object" && value !== null && !Array.isArray(value);
 }
 
-function readJsonFile(path: string): unknown {
-	return JSON.parse(readFileSync(path, "utf8"));
+type RawDevLoopConfig = Record<string, unknown>;
+
+function readConfigFile(path: string): RawDevLoopConfig {
+	let parsed: unknown;
+	try {
+		parsed = JSON.parse(readFileSync(path, "utf8"));
+	} catch (error) {
+		throw new Error(`Invalid dev-loop config at ${path}: ${error instanceof Error ? error.message : String(error)}`, {
+			cause: error,
+		});
+	}
+	if (!isRecord(parsed)) throw new Error(`Invalid dev-loop config at ${path}: expected object`);
+	return parsed;
 }
 
 function resolveConfigPath(configPath: string, value: string): string {
@@ -25,9 +36,7 @@ function resolveConfigPath(configPath: string, value: string): string {
 
 function maybeReadConfig(path: string): Partial<DevLoopConfig> {
 	if (!existsSync(path)) return {};
-	const raw = readJsonFile(path);
-	if (!isRecord(raw)) throw new Error(`Invalid dev-loop config at ${path}: expected object`);
-
+	const raw = readConfigFile(path);
 	const config: Partial<DevLoopConfig> = {};
 	if (raw.maxCycles !== undefined) {
 		const maxCycles = raw.maxCycles;
@@ -77,8 +86,16 @@ function findUp(start: string, relativePath: string): string | undefined {
 	}
 }
 
+function getPiAgentDir(): string {
+	return process.env.PI_CODING_AGENT_DIR ?? process.env.PI_HOME ?? join(homedir(), ".pi", "agent");
+}
+
 export function loadDevLoopConfig(cwd: string): DevLoopConfig {
-	const configPaths = [join(homedir(), ".pi", "agent", "dev-loop", "config.json")];
+	const piAgentDir = getPiAgentDir();
+	const configPaths = [
+		join(piAgentDir, "extensions", "dev-loop", "config.json"),
+		join(piAgentDir, "dev-loop", "config.json"),
+	];
 	const projectConfig = findUp(cwd, join(".pi", "dev-loop.json"));
 	if (projectConfig) configPaths.push(projectConfig);
 

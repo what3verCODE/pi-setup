@@ -1,0 +1,12 @@
+{
+	"$schema": "../../../packages/dev-loop/schemas/config.schema.json",
+	"maxCycles": 3,
+	"agents": {
+		"briefer": "oracle",
+		"worker": "worker",
+		"tester": "tester",
+		"reviewer": "reviewer",
+		"sanity": "reviewer"
+	},
+	"rolePrompts": {}
+}

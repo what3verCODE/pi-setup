@@ -40,6 +40,7 @@ Configuration is optional. Defaults are:
 
 ```json
 {
+	"$schema": "https://raw.githubusercontent.com/what3verCODE/pi-setup/main/packages/dev-loop/schemas/config.schema.json",
 	"maxCycles": 3,
 	"agents": {
 		"briefer": "oracle",
@@ -54,13 +55,15 @@ Configuration is optional. Defaults are:
 
 Config files are read in this order; later files override earlier files:
 
-1. Global: `~/.pi/agent/dev-loop/config.json`
-2. Project: nearest `.pi/dev-loop.json` from the current working directory upward
+1. Managed extension config: `~/.pi/agent/extensions/dev-loop/config.json`
+2. Global user config: `~/.pi/agent/dev-loop/config.json`
+3. Project: nearest `.pi/dev-loop.json` from the current working directory upward
 
 Example project config:
 
 ```json
 {
+	"$schema": "https://raw.githubusercontent.com/what3verCODE/pi-setup/main/packages/dev-loop/schemas/config.schema.json",
 	"maxCycles": 2,
 	"agents": {
 		"briefer": "oracle",
