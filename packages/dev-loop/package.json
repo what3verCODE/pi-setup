@@ -40,7 +40,6 @@
 	"files": [
 		"src",
 		"schemas",
-		"README.md",
-		"SPEC.md"
+		"README.md"
 	]
 }

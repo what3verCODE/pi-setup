@@ -57,6 +57,8 @@ pnpm check
 
 Bootstrap mirrors `packages/` to `~/.pi/agent/packages/`, and `pi/settings.json` loads `./packages/dev-loop` as a local Pi package.
 
+See [CONTRIBUTING.md](CONTRIBUTING.md) for the local development workflow and [docs/local-testing-before-publishing.md](docs/local-testing-before-publishing.md) for the full Pi package testing guide.
+
 ## Not managed here
 
 Do not commit:

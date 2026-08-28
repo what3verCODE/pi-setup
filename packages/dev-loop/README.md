@@ -84,6 +84,6 @@ Relative `rolePrompts` paths resolve relative to the config file that declares t
 
 ## Role prompts
 
-This package ships default role prompt snippets under `src/roles/`. They are not global agent definitions and do not replace user agents. They are prepended to the task sent during `/dev-loop` only.
+This package has built-in default role prompt snippets. They are not global agent definitions and do not replace user agents. They are prepended to the task sent during `/dev-loop` only.
 
 Override `rolePrompts` if you want your own worker/tester/reviewer instructions while keeping the same workflow mechanics.
