@@ -1,0 +1,76 @@
+{
+	"$schema": "https://raw.githubusercontent.com/gotgenes/pi-packages/main/packages/pi-permission-system/schemas/permissions.schema.json",
+	"debugLog": false,
+	"permissionReviewLog": true,
+	"yoloMode": false,
+	"doublePressToConfirm": true,
+	"forwardingTimeoutMs": 600000,
+	"promptMaxRows": 24,
+	"promptFieldMaxWidth": 400,
+	"reviewLogFieldMaxWidth": 1000,
+	"authorizerChain": [],
+	"shellTools": {},
+	"permission": {
+		"*": "allow",
+		"path": {
+			"*": "allow",
+			"*.env": "deny",
+			"*.env.*": "deny",
+			"*.env.example": "allow",
+			"**/.env": "deny",
+			"**/.env.*": "deny",
+			"**/.env.example": "allow",
+			"~/.ssh/*": "deny",
+			"~/.gnupg/*": "deny"
+		},
+		"read": "allow",
+		"grep": "allow",
+		"find": "allow",
+		"ls": "allow",
+		"write": "allow",
+		"edit": "allow",
+		"bash": {
+			"*": "allow",
+			"rm *": "ask",
+			"rmdir *": "ask",
+			"mv *": "ask",
+			"chmod *": "ask",
+			"chown *": "ask",
+			"chgrp *": "ask",
+			"sudo *": "ask",
+			"doas *": "ask",
+			"su *": "ask",
+			"kill *": "ask",
+			"pkill *": "ask",
+			"killall *": "ask",
+			"git push *": "ask",
+			"git reset --hard *": "ask",
+			"git clean *": "ask",
+			"git checkout -f *": "ask",
+			"git restore *": "ask",
+			"curl * | *": "ask",
+			"wget * | *": "ask",
+			"bash -c *": "ask",
+			"sh -c *": "ask",
+			"eval *": "ask",
+			"gh *": "ask",
+			"aws *": "ask",
+			"gcloud *": "ask",
+			"az *": "ask",
+			"kubectl *": "ask"
+		},
+		"mcp": {
+			"*": "ask",
+			"mcp_status": "allow",
+			"mcp_list": "allow",
+			"mcp_search": "allow",
+			"mcp_describe": "allow"
+		},
+		"skill": {
+			"*": "allow"
+		},
+		"external_directory": {
+			"*": "ask"
+		}
+	}
+}

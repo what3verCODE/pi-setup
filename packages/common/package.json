@@ -1,0 +1,36 @@
+{
+	"name": "@what3vercode/pi-common",
+	"version": "0.1.0",
+	"private": false,
+	"type": "module",
+	"description": "Common helpers for what3vercode Pi loop packages.",
+	"scripts": {
+		"clean": "rm -rf dist",
+		"build": "tsc -p tsconfig.json",
+		"typecheck": "tsc -p tsconfig.json --noEmit",
+		"syntaxcheck": "pnpm build && node --check dist/index.js && node --check dist/subagents.js",
+		"prepack": "pnpm build",
+		"check": "pnpm typecheck && pnpm syntaxcheck"
+	},
+	"peerDependencies": {
+		"@earendil-works/pi-coding-agent": "*"
+	},
+	"devDependencies": {
+		"@earendil-works/pi-coding-agent": "0.84.3",
+		"@types/node": "^24.3.0",
+		"protobufjs": "7.6.5"
+	},
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"import": "./dist/index.js"
+		},
+		"./subagents": {
+			"types": "./dist/subagents.d.ts",
+			"import": "./dist/subagents.js"
+		}
+	},
+	"files": [
+		"dist"
+	]
+}

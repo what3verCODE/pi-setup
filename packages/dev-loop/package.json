@@ -1,0 +1,45 @@
+{
+	"name": "@what3vercode/dev-loop",
+	"version": "0.1.0",
+	"private": false,
+	"type": "module",
+	"description": "Personal Pi dev-loop workflow extension using pi-subagents.",
+	"keywords": [
+		"pi-package",
+		"pi-extension",
+		"dev-loop"
+	],
+	"scripts": {
+		"pretypecheck": "pnpm --filter @what3vercode/pi-common build",
+		"presyntaxcheck": "pnpm --filter @what3vercode/pi-common build",
+		"typecheck": "tsc -p tsconfig.json --noEmit",
+		"syntaxcheck": "node --experimental-strip-types --check src/index.ts && node --experimental-strip-types --check src/config.ts && node --experimental-strip-types --check src/types.ts && node --experimental-strip-types --check src/workflow.ts",
+		"debug:pi": "pnpm --filter @what3vercode/pi-common build && pi -e .",
+		"debug:print": "pnpm --filter @what3vercode/pi-common build && pi -e . -p \"Say dev-loop package loaded and do not call tools.\"",
+		"prepack": "pnpm --filter @what3vercode/pi-common build",
+		"check": "pnpm typecheck && pnpm syntaxcheck"
+	},
+	"peerDependencies": {
+		"@earendil-works/pi-coding-agent": "*",
+		"pi-subagents": "0.58.0"
+	},
+	"dependencies": {
+		"@what3vercode/pi-common": "workspace:*"
+	},
+	"devDependencies": {
+		"@earendil-works/pi-coding-agent": "0.84.3",
+		"@types/node": "^24.3.0",
+		"pi-subagents": "0.58.0",
+		"protobufjs": "7.6.5"
+	},
+	"pi": {
+		"extensions": [
+			"./src/index.ts"
+		]
+	},
+	"files": [
+		"src",
+		"README.md",
+		"SPEC.md"
+	]
+}

@@ -1,0 +1,67 @@
+name: Publish packages
+
+on:
+  workflow_dispatch:
+    inputs:
+      package:
+        description: "Package to publish"
+        required: true
+        default: "all"
+        type: choice
+        options: ["all", "pi-common", "dev-loop"]
+      dry_run:
+        description: "Run npm publish with --dry-run"
+        required: true
+        default: "true"
+        type: choice
+        options: ["true", "false"]
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    name: Publish selected packages
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup proto toolchain
+        uses: moonrepo/setup-toolchain@v0
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run checks
+        run: pnpm check
+
+      - name: Pack smoke
+        run: |
+          pnpm --filter @what3vercode/pi-common pack --pack-destination /tmp
+          pnpm --filter @what3vercode/dev-loop pack --pack-destination /tmp
+
+      - name: Publish pi-common dry run
+        if: github.event_name == 'workflow_dispatch' && inputs.dry_run == 'true' && (inputs.package == 'all' || inputs.package == 'pi-common')
+        run: pnpm --filter @what3vercode/pi-common publish --access public --dry-run --no-git-checks
+
+      - name: Publish dev-loop dry run
+        if: github.event_name == 'workflow_dispatch' && inputs.dry_run == 'true' && (inputs.package == 'all' || inputs.package == 'dev-loop')
+        run: pnpm --filter @what3vercode/dev-loop publish --access public --dry-run --no-git-checks
+
+      - name: Publish pi-common to npm
+        if: (github.event_name == 'release') || (github.event_name == 'workflow_dispatch' && inputs.dry_run == 'false' && (inputs.package == 'all' || inputs.package == 'pi-common'))
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: pnpm --filter @what3vercode/pi-common publish --access public --provenance --no-git-checks
+
+      - name: Publish dev-loop to npm
+        if: (github.event_name == 'release') || (github.event_name == 'workflow_dispatch' && inputs.dry_run == 'false' && (inputs.package == 'all' || inputs.package == 'dev-loop'))
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: pnpm --filter @what3vercode/dev-loop publish --access public --provenance --no-git-checks

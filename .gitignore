@@ -1,0 +1,19 @@
+# local/editor
+.DS_Store
+.env
+*.local
+
+# dependency/runtime artifacts
+node_modules/
+packages/*/dist/
+package-lock.json
+
+# pi secrets/state - never commit
+pi/auth.json
+pi/sessions/
+pi/models-store.json
+pi/workflows/state.sqlite*
+
+# backups/logs
+*.bak
+*.log
