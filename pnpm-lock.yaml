@@ -52,8 +52,8 @@ importers:
         specifier: ^24.3.0
         version: 24.13.3
       pi-subagents:
-        specifier: 0.58.0
-        version: 0.58.0(@earendil-works/pi-agent-core@0.84.3(ws@8.21.3))(@earendil-works/pi-ai@0.84.3(ws@8.21.3))(@earendil-works/pi-coding-agent@0.84.3(ws@8.21.3))(@earendil-works/pi-tui@0.84.3)
+        specifier: 0.62.0
+        version: 0.62.0(@earendil-works/pi-agent-core@0.84.3(ws@8.21.3))(@earendil-works/pi-ai@0.84.3(ws@8.21.3))(@earendil-works/pi-coding-agent@0.84.3(ws@8.21.3))(@earendil-works/pi-tui@0.84.3)
       protobufjs:
         specifier: 7.6.5
         version: 7.6.5
@@ -821,8 +821,8 @@ packages:
     resolution: {integrity: sha512-ojmeN0qd+y0jszEtoY48r0Peq5dwMEkIlCOu6Q5f41lfkswXuKtYrhgoTpLnyIcHm24Uhqx+5Tqm2InSwLhE6Q==}
     engines: {node: '>=8'}
 
-  pi-subagents@0.58.0:
-    resolution: {integrity: sha512-o0rm91Vo+N1QrLN+nWdnzM9M96IuUUpo43eo9PhefR9iHX1bFgwaW9ttdg2VGtF+Q0nwgexf2/+sApYdWNGJyw==}
+  pi-subagents@0.62.0:
+    resolution: {integrity: sha512-Zup0siBTtfvI9mE1oraIMW/ahzyxOg/HPQAlHPw6L6rw4qdHK6B91XhJIFrt4oiPeWuauZm/d15n7HkliqXmnw==}
     hasBin: true
     peerDependencies:
       '@earendil-works/pi-agent-core': '*'
@@ -1900,7 +1900,7 @@ snapshots:
 
   path-key@3.1.1: {}
 
-  pi-subagents@0.58.0(@earendil-works/pi-agent-core@0.84.3(ws@8.21.3))(@earendil-works/pi-ai@0.84.3(ws@8.21.3))(@earendil-works/pi-coding-agent@0.84.3(ws@8.21.3))(@earendil-works/pi-tui@0.84.3):
+  pi-subagents@0.62.0(@earendil-works/pi-agent-core@0.84.3(ws@8.21.3))(@earendil-works/pi-ai@0.84.3(ws@8.21.3))(@earendil-works/pi-coding-agent@0.84.3(ws@8.21.3))(@earendil-works/pi-tui@0.84.3):
     dependencies:
       acorn: 8.18.0
       jiti: 2.7.0
